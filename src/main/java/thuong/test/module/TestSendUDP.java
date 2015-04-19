@@ -60,7 +60,6 @@ import net.floodlightcontroller.threadpool.IThreadPoolService;
 //In host terminal: sudo arp -s 10.0.0.3 aa:aa:aa:aa:aa:aa
 //In host terminal: javac TestSendUDP.java
 //In host terminal: java TestSendUDP
-
 //version 2 no need add arp
 
 public class TestSendUDP implements IFloodlightModule, IOFMessageListener {
