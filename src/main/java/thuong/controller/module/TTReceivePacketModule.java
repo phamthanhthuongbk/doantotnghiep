@@ -113,8 +113,8 @@ public class TTReceivePacketModule implements IFloodlightModule,
 
 			TTBasePacketCustom packet = new TTBasePacketCustom();
 			packet.createPaketFromDataPacket(data);
+			
 			// create New device
-
 			TTHostDevice hostDevice = new TTHostDevice();
 			hostDevice.helloPacketContext = cntx;
 			hostDevice.helloPacketFromHost = pkIn;
@@ -127,11 +127,16 @@ public class TTReceivePacketModule implements IFloodlightModule,
 			// Check HelloPacket
 			if (packet.packetType == TTBasePacketCustom.PACKET_TYPE_HELLO) {
 				TTDeviceManager.AddNewDevice(hostDevice);
-				log.info("Goi tin Hello");
+//				log.info("Goi tin Hello");
 			} else {
 				// process packet
+				packet.hostDevice = TTDeviceManager.GetDevice(hostDevice);
+				
+				
 				log.info("Goi tin trao doi tu host \nSRC: " + msg.toString());
 				log.info("Switch: " + sw.getId().getLong());
+				log.info("Host Switch "+ packet.hostDevice.idSwitch);
+				log.info("Host Port "+ packet.hostDevice.portSwitch.getPortNumber());
 				processPacketThread.addQueue(packet);
 			}
 

@@ -75,7 +75,7 @@ public class TTSendPacketThread extends Thread {
 					TTHostDevice target = node.targetNode;
 					sendUDPToHost(target.iOFSwitch, target.helloPacketFromHost, target.helloPacketContext,target.eth, packet.getBytePacketHeader());
 					sendUDPToHost(target.iOFSwitch, target.helloPacketFromHost, target.helloPacketContext,target.eth, packet.getBytePacketData());
-		
+					
 				}
 
 			} catch (InterruptedException ie) {

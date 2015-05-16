@@ -28,6 +28,16 @@ public class TTDeviceManager {
 		}
 	}
 	
+	//Tim kiem device tuong tu
+	public static TTHostDevice GetDevice(TTHostDevice hostDevice){
+		for(int i = 0; i< listDevice.size(); i++){
+			TTHostDevice tempDevice = listDevice.get(i);
+			if((tempDevice.idSwitch == hostDevice.idSwitch)&&(tempDevice.portSwitch.getPortNumber() == hostDevice.portSwitch.getPortNumber()))
+				return tempDevice;
+		}
+		return null;
+	}
+	
 	//Lay ra mot device
 	public static TTHostDevice GetDevice(long idSwitch){
 		for(int i = 0; i< listDevice.size(); i++){
