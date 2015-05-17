@@ -127,7 +127,7 @@ public class TTReceivePacketModule implements IFloodlightModule,
 			// Check HelloPacket
 			if (packet.packetType == TTBasePacketCustom.PACKET_TYPE_HELLO) {
 				TTDeviceManager.AddNewDevice(hostDevice);
-//				log.info("Goi tin Hello");
+				processPacketThread.addQueue(packet);
 			} else {
 				// process packet
 				packet.hostDevice = TTDeviceManager.GetDevice(hostDevice);
