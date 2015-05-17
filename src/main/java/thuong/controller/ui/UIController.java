@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JComboBox;
 
 public class UIController extends JFrame {
 
@@ -44,11 +45,11 @@ public class UIController extends JFrame {
 
 	public JTextArea textLog = new JTextArea();
 	public JLabel numberHost;
+	public JComboBox hostComboBox;
 	
 	
 	public TTSendPacketThread sendPacketThread;
 	private JTextField sendString;
-	private JTextField sendHost;
 
 	/**
 	 * Create the frame.
@@ -94,11 +95,6 @@ public class UIController extends JFrame {
 		lblHost.setBounds(342, 12, 38, 15);
 		contentPane.add(lblHost);
 		
-		sendHost = new JTextField();
-		sendHost.setBounds(123, 128, 38, 19);
-		contentPane.add(sendHost);
-		sendHost.setColumns(10);
-		
 		JLabel lblHost_1 = new JLabel("HostID");
 		lblHost_1.setBounds(123, 109, 47, 15);
 		contentPane.add(lblHost_1);
@@ -128,6 +124,11 @@ public class UIController extends JFrame {
 		lblBiuKhin.setBackground(Color.RED);
 		lblBiuKhin.setBounds(28, 12, 278, 85);
 		contentPane.add(lblBiuKhin);
+		
+		hostComboBox = new JComboBox();
+		hostComboBox.setBounds(123, 126, 58, 24);
+		hostComboBox.addItem("All Host");
+		contentPane.add(hostComboBox);
 	}
 	
 	//Gui yeu cau Lay infor toi cac host
@@ -141,9 +142,10 @@ public class UIController extends JFrame {
 	//Gui string den host
 	public void sendStringToHost(){
 		String text = sendString.getText();
+//		hostComboBox.getAlignmentY();
 		for(int i = 0; i< TTDeviceManager.listDevice.size(); i++){
 		TTHostDevice hostDevice = TTDeviceManager.listDevice.get(i);
-		sendPacketThread.addQueue(new TTBasePacketCustom(TTBasePacketCustom.PACKET_TYPE_SEND_STRING, text.getBytes()), TTDeviceManager.listDevice.get(i));
+		sendPacketThread.addQueue(new TTBasePacketCustom(TTBasePacketCustom.PACKET_TYPE_SEND_STRING, (text ).getBytes()), TTDeviceManager.listDevice.get(i));
 		}
 	}
 	
@@ -157,5 +159,6 @@ public class UIController extends JFrame {
 	
 	public void newHostConnect(){
 		numberHost.setText("" + TTDeviceManager.listDevice.size());
+		hostComboBox.addItem("Host " +  TTDeviceManager.listDevice.size());
 	}
 }
