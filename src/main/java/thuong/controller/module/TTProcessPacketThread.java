@@ -5,6 +5,7 @@ import java.util.Queue;
 
 import thuong.controller.device.TTDeviceManager;
 import thuong.controller.device.TTHostDevice;
+import thuong.controller.execute.TTHostConnect;
 import thuong.controller.execute.TTInforProcess;
 import thuong.controller.execute.TTStringProcess;
 import thuong.controller.ui.UIController;
@@ -23,6 +24,8 @@ public class TTProcessPacketThread extends Thread{
 	public TTProcessPacketThread(){
 		ThreadLog("Khoi tao thread Process");
 		queue = new LinkedList<TTBasePacketCustom>();
+		
+
 	}
 	
 	public void addQueue(TTBasePacketCustom packet) {
@@ -41,11 +44,13 @@ public class TTProcessPacketThread extends Thread{
 	
 	@Override
 	public void run() {
+
+		uiController = new UIController(sendpacketThread);
+		uiController.setVisible(true);
+		
 		while (true) {
 			try {
 				//UI test
-				uiController = new UIController(sendpacketThread);
-				uiController.setVisible(true);
 
 				synchronized (queue) {
 					while (queue.isEmpty())
@@ -89,15 +94,15 @@ public class TTProcessPacketThread extends Thread{
 		switch (packet.packetType) {
 		case TTBasePacketCustom.PACKET_TYPE_HELLO:
 			//Nhan dc goi tin hello
-			uiController.newHostConnect();
+			TTHostConnect.HostConnect(uiController);
 			break;
 		case TTBasePacketCustom.PACKET_TYPE_SEND_STRING:
 			//Nhan dc string tu host
-			TTStringProcess.StringProcess(packet, sendpacketThread);
+			TTStringProcess.StringProcess(packet, sendpacketThread, uiController);
 			break;
 		case TTBasePacketCustom.PACKET_TYPE_SEND_INFOR:
 			//Nhan duoc thong tin cau hinh ve host
-			TTInforProcess.InforProcess(packet, sendpacketThread);
+			TTInforProcess.InforProcess(packet, sendpacketThread, uiController);
 			break;
 		case TTBasePacketCustom.PACKET_TYPE_STOP_SERVER:
 			break;

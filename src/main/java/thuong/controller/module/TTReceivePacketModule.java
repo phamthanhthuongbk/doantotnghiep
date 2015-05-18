@@ -183,12 +183,12 @@ public class TTReceivePacketModule implements IFloodlightModule,
 		log.info("STARTTTTTTTTTTTTTTTTT");
 
 		sendpacketThread = new TTSendPacketThread();
+		sendpacketThread.start();
 
 		processPacketThread = new TTProcessPacketThread();
 		processPacketThread.setLogEnable(false);
 		processPacketThread.sendpacketThread = sendpacketThread;
 
-		sendpacketThread.start();
 		processPacketThread.start();
 
 	}

@@ -27,7 +27,7 @@ public class TTDeviceManager {
 			System.out.println("IDPort:   " + tempDevice.portSwitch.getPortNumber());
 		}
 	}
-	
+
 	//Tim kiem device tuong tu
 	public static TTHostDevice GetDevice(TTHostDevice hostDevice){
 		for(int i = 0; i< listDevice.size(); i++){
@@ -36,6 +36,16 @@ public class TTDeviceManager {
 				return tempDevice;
 		}
 		return null;
+	}
+	
+	//Tim kiem device tuong tu
+	public static int GetDeviceID(TTHostDevice hostDevice){
+		for(int i = 0; i< listDevice.size(); i++){
+			TTHostDevice tempDevice = listDevice.get(i);
+			if((tempDevice.idSwitch == hostDevice.idSwitch)&&(tempDevice.portSwitch.getPortNumber() == hostDevice.portSwitch.getPortNumber()))
+				return i;
+		}
+		return -1;
 	}
 	
 	//Lay ra mot device
