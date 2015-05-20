@@ -188,13 +188,21 @@ public class UIController extends JFrame {
 										.getBytes()),
 						TTDeviceManager.listDevice.get(i));
 			}
+			TTDeviceManager.listDevice.clear();
+			hostComboBox.removeAllItems();
+			hostComboBox.addItem("All Host");
+			numberHost.setText("0");
 			return;
 		}
+		
 		int i = hostComboBox.getSelectedIndex() - 1;
 		TTHostDevice hostDevice = TTDeviceManager.listDevice.get(i);
 		sendPacketThread.addQueue(new TTBasePacketCustom(
 				TTBasePacketCustom.PACKET_TYPE_STOP_SERVER, "".getBytes()),
 				TTDeviceManager.listDevice.get(i));
+		TTDeviceManager.listDevice.remove(i);
+		hostComboBox.removeItemAt(i+1);
+		numberHost.setText("" + TTDeviceManager.listDevice.size());
 	}
 
 	public void newHostConnect() {

@@ -35,7 +35,7 @@ public class UIClient extends JFrame {
 		lblHostOpenflow.setForeground(Color.RED);
 		lblHostOpenflow.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 16));
 		lblHostOpenflow.setBackground(Color.RED);
-		lblHostOpenflow.setBounds(128, 12, 237, 85);
+		lblHostOpenflow.setBounds(43, 12, 237, 85);
 		contentPane.add(lblHostOpenflow);
 		
 		JTextArea texLog = new JTextArea();
@@ -63,5 +63,14 @@ public class UIClient extends JFrame {
 		JLabel label_1 = new JLabel("String");
 		label_1.setBounds(136, 125, 70, 15);
 		contentPane.add(label_1);
+		
+		JButton connectBtn = new JButton("Connect");
+		connectBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		connectBtn.setBackground(Color.ORANGE);
+		connectBtn.setBounds(305, 12, 131, 25);
+		contentPane.add(connectBtn);
 	}
 }
